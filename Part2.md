@@ -82,5 +82,22 @@ npm install tedious
 npm start
 ```
 enter: http://localhost:7071/api/todo/1
+
 13. Deploy Azure Function to Azure! From VS Code Azure Extension, go to "Resources" section and find your Azure Function. Right mouse click on it and "Deploy to Function App..."
+
 14. Check if GET method work in Azure Function. You can play with another methods (POST, PUT, DELETE) using your REST client.
+
+15. Add terraform code:
+```
+resource "azurerm_key_vault_secret" "dbuser" {
+  name         = "dbuser"
+  value        = "${var.dbadmin}"
+  key_vault_id = azurerm_key_vault.example.id
+}
+
+resource "azurerm_key_vault_secret" "dbpass" {
+  name         = "dbpass"
+  value        = "${var.dbadminpass}"
+  key_vault_id = azurerm_key_vault.example.id
+}
+```
